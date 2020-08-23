@@ -1,0 +1,9 @@
+[dev-packages]
+pipenv = "==2020.8.13"
+moto = "==1.3.14"
+
+[packages]
+pynamodb = "==4.3.2"
+
+[requires]
+python_version = "3.8"
