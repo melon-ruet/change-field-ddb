@@ -30,7 +30,7 @@ with moto.mock_dynamodb2():
     result1_retr = ResultModel.get(result1_id)
     assert result1_retr.result.attribute_values == result_map
 
-    # Insert as list so it will convert and
+    # Insert as list so it will convert and saved as map
     result2 = ResultModel(result=result_list)
     result2.save()
     assert ResultModel.count() == 2
@@ -45,7 +45,7 @@ with moto.mock_dynamodb2():
     dynamodb = boto3.resource('dynamodb', region)
     table = dynamodb.Table(ResultModel.Meta.table_name)
 
-    # float is not supported by boto3. So converted to Decimal
+    # float is not supported by boto3. But decimal is supported. So converted to Decimal
     item = [Decimal(str(v)) for v in result_list]
     # Updating item instead of creating because result is MapAttribute by default
     table.update_item(
